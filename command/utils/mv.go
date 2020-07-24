@@ -5,10 +5,10 @@ import (
 	"os"
 )
 
-func ExeMv(sources []string, operationDir string, targetDir string) error {
+func ExeMv(sources []string, operationPath string, targetPath string) error {
 	for _, source := range sources {
-		oldPath := fmt.Sprintf("%s/%s", operationDir, RemovePrefix(source))
-		newPath := fmt.Sprintf("%s/%s", targetDir, RemovePrefix(source))
+		oldPath := fmt.Sprintf("%s/%s", operationPath, RemovePrefix(source))
+		newPath := fmt.Sprintf("%s/%s", targetPath, RemovePrefix(source))
 
 		_, statErr := os.Stat(newPath)
 		if !os.IsNotExist(statErr) {
@@ -27,6 +27,7 @@ func ExeMv(sources []string, operationDir string, targetDir string) error {
 		}
 	}
 
+	AppendLog(operationPath, targetPath, "mv")
 	return nil
 }
 

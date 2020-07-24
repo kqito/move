@@ -62,6 +62,7 @@ func copyFile(sourcePath string, targetPath string) error {
 		return err
 	}
 
+	AppendLog(sourcePath, targetPath, "cp")
 	return nil
 }
 

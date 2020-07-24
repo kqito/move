@@ -25,10 +25,15 @@ func RunMove() func(cmd *cobra.Command, args []string) error {
 		// Execute
 		utils.MkdirAll(Args.TargetDir)
 
+		var result error
+
 		if Flag.Copy {
-			return utils.ExeCp(selectedSources, Args.OperationDir, Args.TargetDir)
+			result = utils.ExeCp(selectedSources, Args.OperationDir, Args.TargetDir)
+		} else {
+			result = utils.ExeMv(selectedSources, Args.OperationDir, Args.TargetDir)
 		}
 
-		return utils.ExeMv(selectedSources, Args.OperationDir, Args.TargetDir)
+		utils.PrintLog()
+		return result
 	}
 }
