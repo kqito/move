@@ -20,11 +20,6 @@ var Args = &ArgsType{
 
 func VerifyArgs() cobra.PositionalArgs {
 	return func(cmd *cobra.Command, args []string) error {
-		cwd, err := os.Getwd()
-		if err != nil {
-			return err
-		}
-
 		if len(args) != 2 {
 			return fmt.Errorf("Require two directory args.")
 		}
@@ -33,11 +28,7 @@ func VerifyArgs() cobra.PositionalArgs {
 			return err
 		}
 
-		operationDir, err := filepath.Rel(cwd, args[0])
-		if err != nil {
-			return err
-		}
-
+		operationDir := args[0]
 		targetDir := args[1]
 
 		if operationDir == targetDir {
