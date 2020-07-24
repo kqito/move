@@ -12,7 +12,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func RunMmv() func(cmd *cobra.Command, args []string) error {
+func RunMove() func(cmd *cobra.Command, args []string) error {
 	return func(cmd *cobra.Command, args []string) error {
 		sources, err := ioutil.ReadDir(Args.OperationDir)
 		if err != nil {

@@ -1,4 +1,4 @@
-module github.com/kqito/mmv
+module github.com/kqito/move
 
 go 1.14
 

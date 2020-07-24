@@ -8,12 +8,12 @@ import (
 )
 
 var cmd = &cobra.Command{
-	Use:   "mmv [operation dir] [target dir]",
+	Use:   "move [operation dir] [target dir]",
 	Short: "Commands that can mv multiple files at once",
 	Long: `Execute commands for multiple files from the specified directory,
 			not only the mv command but also the cp command.`,
 	Args: VerifyArgs(),
-	RunE: RunMmv(),
+	RunE: RunMove(),
 }
 
 func Execute() {

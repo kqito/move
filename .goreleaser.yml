@@ -1,9 +1,9 @@
 builds:
   -
     main: ./main.go
-    binary: mmv
+    binary: move
     ldflags:
-      - -s -w -X "github.com/kqito/multiple-mv.Version={{.Tag}}"
+      - -s -w -X "github.com/kqito/move.Version={{.Tag}}"
     goos:
       - darwin
       - linux

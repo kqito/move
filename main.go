@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/kqito/mmv/command"
+	"github.com/kqito/move/command"
 )
 
 func main() {
