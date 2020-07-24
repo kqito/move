@@ -20,6 +20,11 @@ var Args = &ArgsType{
 
 func VerifyArgs() cobra.PositionalArgs {
 	return func(cmd *cobra.Command, args []string) error {
+		cwd, err := os.Getwd()
+		if err != nil {
+			return err
+		}
+
 		if len(args) != 2 {
 			return fmt.Errorf("Require two directory args.")
 		}
@@ -28,14 +33,14 @@ func VerifyArgs() cobra.PositionalArgs {
 			return err
 		}
 
-		operationDir, operationDirErr := filepath.Abs(args[0])
-		if operationDirErr != nil {
-			return operationDirErr
+		operationDir, err := filepath.Rel(cwd, args[0])
+		if err != nil {
+			return err
 		}
 
-		targetDir, targetDirErr := filepath.Abs(args[1])
-		if targetDirErr != nil {
-			return targetDirErr
+		targetDir, err := filepath.Rel(cwd, args[1])
+		if err != nil {
+			return err
 		}
 
 		if operationDir == targetDir {
@@ -50,13 +55,13 @@ func VerifyArgs() cobra.PositionalArgs {
 }
 
 func isExistDir(path string, dirName string) error {
-	absPath, absErr := filepath.Abs(path)
-	if absErr != nil {
+	absPath, err := filepath.Abs(path)
+	if err != nil {
 		return fmt.Errorf("The %s directory may not exist.", dirName)
 	}
 
-	fileInfo, statErr := os.Stat(absPath)
-	if statErr != nil {
+	fileInfo, err := os.Stat(absPath)
+	if err != nil {
 		return fmt.Errorf("The %s directory may not exist.", dirName)
 	}
 
@@ -64,7 +69,7 @@ func isExistDir(path string, dirName string) error {
 		return fmt.Errorf("The %s args is not a directory", dirName)
 	}
 
-	if os.IsNotExist(statErr) {
+	if os.IsNotExist(err) {
 		return fmt.Errorf("The directory specified in the %s argument does not exist.", dirName)
 	}
 
