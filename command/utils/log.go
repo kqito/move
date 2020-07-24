@@ -4,17 +4,34 @@ import (
 	"fmt"
 )
 
-var Log []string
+type LogType struct {
+	prefix   string
+	operator string
+	target   string
+}
+
+var logs []LogType
 
 func AppendLog(operatorPath string, targetPath string, prefix string) {
-	log := fmt.Sprintf("[%s] %s ===> %s", prefix, operatorPath, targetPath)
+	log := LogType{
+		prefix:   prefix,
+		operator: operatorPath,
+		target:   targetPath,
+	}
 
-	Log = append(Log, log)
+	logs = append(logs, log)
 }
 
 func PrintLog() {
-	fmt.Println("")
-	for _, log := range Log {
-		fmt.Println(log)
+	var maxLen = 0
+	for _, log := range logs {
+		if maxLen < len(log.operator) {
+			maxLen = len(log.operator)
+		}
+	}
+
+	// "'%-20s'\n"
+	for _, log := range logs {
+		fmt.Printf("[%s] %-*s  ====>  %s\n", log.prefix, maxLen, log.operator, log.target)
 	}
 }

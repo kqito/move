@@ -6,12 +6,12 @@ import (
 )
 
 func MkdirAll(path string) error {
-	_, statErr := os.Stat(path)
-	if statErr == nil {
+	_, err := os.Stat(path)
+	if err == nil {
 		return nil
 	}
 
-	err := os.MkdirAll(path, 0755)
+	err = os.MkdirAll(path, 0755)
 	if err != nil {
 		return err
 	}

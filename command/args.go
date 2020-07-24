@@ -38,10 +38,7 @@ func VerifyArgs() cobra.PositionalArgs {
 			return err
 		}
 
-		targetDir, err := filepath.Rel(cwd, args[1])
-		if err != nil {
-			return err
-		}
+		targetDir := args[1]
 
 		if operationDir == targetDir {
 			return fmt.Errorf("The args is same dir.")

@@ -11,9 +11,9 @@ func OverwriteSource(message string, removeSourcePath string) (bool, error) {
 		return false, nil
 	}
 
-	removeAllErr := os.RemoveAll(removeSourcePath)
-	if removeAllErr != nil {
-		return false, removeAllErr
+	err := os.RemoveAll(removeSourcePath)
+	if err != nil {
+		return false, err
 	}
 
 	return true, nil
