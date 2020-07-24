@@ -43,6 +43,9 @@ func RunMove() func(cmd *cobra.Command, args []string) error {
 		}
 		survey.AskOne(prompt, &selectedSources)
 
+		// Execute
+		mkdirAll(Args.TargetDir)
+
 		if Flag.Copy {
 			return cp(selectedSources)
 		}
@@ -161,6 +164,22 @@ func copyDir(sourcePath string, targetPath string) error {
 			}
 		}
 	}
+
+	return nil
+}
+
+func mkdirAll(path string) error {
+	_, statErr := os.Stat(path)
+	if statErr == nil {
+		return nil
+	}
+
+	err := os.MkdirAll(path, 0755)
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("mkdir: %s", path)
 
 	return nil
 }

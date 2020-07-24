@@ -28,12 +28,15 @@ func VerifyArgs() cobra.PositionalArgs {
 			return err
 		}
 
-		if err := isExistDir(args[1], "second"); err != nil {
-			return err
+		operationDir, operationDirErr := filepath.Abs(args[0])
+		if operationDirErr != nil {
+			return operationDirErr
 		}
 
-		operationDir, _ := filepath.Abs(args[0])
-		targetDir, _ := filepath.Abs(args[1])
+		targetDir, targetDirErr := filepath.Abs(args[1])
+		if targetDirErr != nil {
+			return targetDirErr
+		}
 
 		if operationDir == targetDir {
 			return fmt.Errorf("The args is same dir.")
@@ -54,7 +57,7 @@ func isExistDir(path string, dirName string) error {
 
 	fileInfo, statErr := os.Stat(absPath)
 	if statErr != nil {
-		return fmt.Errorf("It couldn't get the %s directory information.", dirName)
+		return fmt.Errorf("The %s directory may not exist.", dirName)
 	}
 
 	if !fileInfo.IsDir() {
