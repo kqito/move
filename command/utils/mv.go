@@ -25,9 +25,9 @@ func ExeMv(sources []string, operationPath string, targetPath string) error {
 		if err := os.Rename(oldPath, newPath); err != nil {
 			return err
 		}
+		AppendLog(oldPath, newPath, "mv")
+
 	}
 
-	AppendLog(operationPath, targetPath, "mv")
 	return nil
 }
-
