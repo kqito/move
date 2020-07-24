@@ -12,7 +12,7 @@ var cmd = &cobra.Command{
 	Long: `Execute commands for multiple files from the specified directory,
 			not only the mv command but also the cp command.`,
 	Args: VerifyArgs(),
-	Run:  RunMmv(),
+	RunE: RunMmv(),
 }
 
 func Execute() {

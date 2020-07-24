@@ -3,6 +3,7 @@ module mmv
 go 1.14
 
 require (
+	github.com/AlecAivazis/survey/v2 v2.0.8
 	github.com/docker/distribution v2.7.1+incompatible // indirect
 	github.com/docker/docker v1.13.1 // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
