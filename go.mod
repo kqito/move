@@ -1,4 +1,4 @@
-module mmv
+module github.com/kqito/mmv
 
 go 1.14
 

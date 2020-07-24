@@ -1,7 +1,7 @@
 package main
 
 import (
-	"mmv/command"
+	"github.com/kqito/mmv/command"
 )
 
 func main() {
