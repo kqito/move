@@ -6,7 +6,7 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 )
 
-func ConfirmOverride(message string, removeSourcePath string) (bool, error) {
+func OverwriteSource(message string, removeSourcePath string) (bool, error) {
 	if !confirm(message) {
 		return false, nil
 	}
@@ -28,4 +28,3 @@ func confirm(message string) bool {
 
 	return isConfirm
 }
-

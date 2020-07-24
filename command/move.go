@@ -20,7 +20,7 @@ func RunMove() func(cmd *cobra.Command, args []string) error {
 		}
 
 		var selectedSources []string
-		utils.SelectSources(sources, selectedSources)
+		utils.SelectSources(sources, &selectedSources)
 
 		// Execute
 		utils.MkdirAll(Args.TargetDir)

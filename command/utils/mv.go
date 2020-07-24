@@ -10,9 +10,9 @@ func ExeMv(sources []string, operationDir string, targetDir string) error {
 		oldPath := fmt.Sprintf("%s/%s", operationDir, RemovePrefix(source))
 		newPath := fmt.Sprintf("%s/%s", targetDir, RemovePrefix(source))
 
-		_, err := os.Stat(newPath)
-		if err == nil {
-			isConfirmed, removeErr := ConfirmOverwrite(fmt.Sprintf("%s is exist! Overwrite?", newPath), newPath)
+		_, statErr := os.Stat(newPath)
+		if !os.IsNotExist(statErr) {
+			isConfirmed, removeErr := OverwriteSource(fmt.Sprintf("%s is exist! Overwrite?", newPath), newPath)
 			if removeErr != nil {
 				return removeErr
 			}

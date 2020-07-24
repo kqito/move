@@ -6,7 +6,7 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 )
 
-func SelectSources(sources []os.FileInfo, selected []string) {
+func SelectSources(sources []os.FileInfo, selected *[]string) {
 	var sourceNames []string
 
 	for _, source := range sources {
@@ -25,5 +25,5 @@ func SelectSources(sources []os.FileInfo, selected []string) {
 		Options: sourceNames,
 	}
 
-	survey.AskOne(prompt, &selected)
+	survey.AskOne(prompt, selected)
 }
