@@ -33,6 +33,18 @@ func ExeCp(sources []string, operationDir string, targetDir string) error {
 }
 
 func copyFile(sourcePath string, targetPath string) error {
+	_, statErr := os.Stat(targetPath)
+	if !os.IsNotExist(statErr) {
+		isConfirmed, removeErr := OverwriteSource(fmt.Sprintf("%s is exist! Overwrite?", targetPath), targetPath)
+		if removeErr != nil {
+			return removeErr
+		}
+
+		if !isConfirmed {
+			return nil
+		}
+	}
+
 	src, err := os.Open(sourcePath)
 	if err != nil {
 		return err
@@ -103,4 +115,3 @@ func copyDir(sourcePath string, targetPath string) error {
 
 	return nil
 }
-
