@@ -5,6 +5,11 @@
 
 Commands to move or copy multiple files or directories at once.
 
+## Demo
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/29191111/88401427-b29c4c00-ce04-11ea-83e6-73ccc3282167.gif" width="800" alt="demo">
+</p>
+
 
 ## Features
 - Multiple files and directories can be moved or copied together at once.

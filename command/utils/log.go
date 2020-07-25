@@ -30,7 +30,6 @@ func PrintLog() {
 		}
 	}
 
-	// "'%-20s'\n"
 	for _, log := range logs {
 		fmt.Printf("[%s] %-*s  ====>  %s\n", log.prefix, maxLen, log.operator, log.target)
 	}
