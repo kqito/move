@@ -3,6 +3,7 @@ package command
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 
 	"github.com/kqito/move/command/utils"
 	"github.com/spf13/cobra"
@@ -16,14 +17,23 @@ func RunMove() func(cmd *cobra.Command, args []string) error {
 		}
 
 		if len(sources) == 0 {
-			fmt.Printf("%s does not exist sources.", Args.OperationDir)
+			fmt.Printf("'%s' does not exist sources.", Args.OperationDir)
+		}
+
+		_, err = os.Stat(Args.TargetDir)
+		if err != nil {
+			isCreated, err := utils.MkdirTargetDir(Args.TargetDir)
+			if !isCreated {
+				return nil
+			}
+
+			if err != nil {
+				return err
+			}
 		}
 
 		var selectedSources []string
 		utils.SelectSources(sources, &selectedSources)
-
-		// Execute
-		utils.MkdirAll(Args.TargetDir)
 
 		var result error
 
